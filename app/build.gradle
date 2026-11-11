@@ -1,0 +1,61 @@
+plugins {
+    alias libs.plugins.android.application
+}
+
+android {
+    namespace 'com.mipt.calculator'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'com.mipt.calculator'
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    testOptions {
+        unitTests {
+            returnDefaultValues = true
+            all {
+                jvmArgs "-Dfile.encoding=UTF-8"
+                executable = "C:/Program Files/Android/openjdk/jdk-21.0.8/bin/java.exe"
+                doFirst {
+                    def fixed = classpath.files.collect { f ->
+                        def p = f.absolutePath
+                        if (p.contains("Mobiliųjų įrenginių programavimo technologijos")) {
+                            new File(p.replace("Mobiliųjų įrenginių programavimo technologijos\\Praktikos darbas 4", "MOBILI~1\\PRAKTI~4")
+                                      .replace("Mobiliųjų įrenginių programavimo technologijos", "MOBILI~1"))
+                        } else {
+                            f
+                        }
+                    }
+                    classpath = project.files(fixed)
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.constraintlayout
+
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}

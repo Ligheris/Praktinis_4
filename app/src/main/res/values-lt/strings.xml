@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">Skaičiuotuvas</string>
+    <string name="mode_standard">Standartinis</string>
+    <string name="history_title">Istorija</string>
+    <string name="history_empty">Istorijos dar nėra</string>
+    <string name="clear_history">Išvalyti visą istoriją</string>
+
+    <!-- Memory buttons -->
+    <string name="btn_mc">MC</string>
+    <string name="btn_mr">MR</string>
+    <string name="btn_m_plus">M+</string>
+    <string name="btn_m_minus">M-</string>
+    <string name="btn_ms">MS</string>
+    <string name="btn_m_view">M▾</string>
+
+    <!-- Function buttons -->
+    <string name="btn_percent">%</string>
+    <string name="btn_ce">CE</string>
+    <string name="btn_c">C</string>
+    <string name="btn_backspace">⌫</string>
+    <string name="btn_one_over_x">1/x</string>
+    <string name="btn_sqr">x²</string>
+    <string name="btn_sqrt">√x</string>
+    <string name="btn_divide">÷</string>
+    <string name="btn_multiply">×</string>
+    <string name="btn_subtract">−</string>
+    <string name="btn_add">+</string>
+    <string name="btn_equals">=</string>
+    <string name="btn_negate">+/−</string>
+    <string name="btn_dot">.</string>
+
+    <!-- Digits -->
+    <string name="btn_0">0</string>
+    <string name="btn_1">1</string>
+    <string name="btn_2">2</string>
+    <string name="btn_3">3</string>
+    <string name="btn_4">4</string>
+    <string name="btn_5">5</string>
+    <string name="btn_6">6</string>
+    <string name="btn_7">7</string>
+    <string name="btn_8">8</string>
+    <string name="btn_9">9</string>
+
+    <!-- Content descriptions & Error messages -->
+    <string name="content_desc_menu">Atidaryti meniu</string>
+    <string name="content_desc_history">Istorija</string>
+    <string name="content_desc_keep_on_top">Visada viršuje</string>
+    <string name="content_desc_backspace">Trinti simbolį</string>
+    <string name="content_desc_clear_history">Išvalyti istoriją</string>
+    <string name="error_divide_by_zero">Dalyba iš nulio negalima</string>
+    <string name="error_invalid_input">Neteisinga įvestis</string>
+</resources>

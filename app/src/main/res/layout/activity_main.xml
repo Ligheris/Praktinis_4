@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/calc_background">
+
+    <!-- Top bar -->
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_menu"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_menu"
+            android:contentDescription="@string/content_desc_menu" />
+
+        <TextView
+            android:id="@+id/tv_mode_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="@string/mode_standard"
+            android:textColor="@color/calc_display_primary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btn_keep_on_top"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_keep_on_top"
+            android:contentDescription="@string/content_desc_keep_on_top" />
+
+        <ImageButton
+            android:id="@+id/btn_history_toggle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_history"
+            android:contentDescription="@string/content_desc_history" />
+    </LinearLayout>
+
+    <!-- Display Area -->
+    <LinearLayout
+        android:id="@+id/display_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="110dp"
+        android:orientation="vertical"
+        android:gravity="end|bottom"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/top_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tv_expression"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textColor="@color/calc_display_secondary"
+            android:textSize="15sp"
+            android:ellipsize="start"
+            android:singleLine="true"
+            tools:text="12 + 8 =" />
+
+        <TextView
+            android:id="@+id/tv_display"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="0"
+            android:textColor="@color/calc_display_primary"
+            android:textSize="46sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="start"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMinTextSize="20sp"
+            app:autoSizeMaxTextSize="46sp"
+            app:autoSizeStepGranularity="2sp"
+            tools:text="20" />
+    </LinearLayout>
+
+    <!-- Memory buttons bar -->
+    <LinearLayout
+        android:id="@+id/memory_bar"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
+        app:layout_constraintTop_toBottomOf="@id/display_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btn_mc"
+            style="@style/CalcMemoryButton"
+            android:text="@string/btn_mc"
+            android:enabled="false" />
+
+        <Button
+            android:id="@+id/btn_mr"
+            style="@style/CalcMemoryButton"
+            android:text="@string/btn_mr"
+            android:enabled="false" />
+
+        <Button
+            android:id="@+id/btn_m_plus"
+            style="@style/CalcMemoryButton"
+            android:text="@string/btn_m_plus" />
+
+        <Button
+            android:id="@+id/btn_m_minus"
+            style="@style/CalcMemoryButton"
+            android:text="@string/btn_m_minus" />
+
+        <Button
+            android:id="@+id/btn_ms"
+            style="@style/CalcMemoryButton"
+            android:text="@string/btn_ms" />
+
+        <Button
+            android:id="@+id/btn_m_view"
+            style="@style/CalcMemoryButton"
+            android:text="@string/btn_m_view"
+            android:enabled="false" />
+    </LinearLayout>
+
+    <!-- Keypad and Overlay Container -->
+    <FrameLayout
+        android:id="@+id/keypad_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="4dp"
+        app:layout_constraintTop_toBottomOf="@id/memory_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Main Keypad Grid (6 rows x 4 columns) -->
+        <GridLayout
+            android:id="@+id/keypad_grid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnCount="4"
+            android:rowCount="6">
+
+            <!-- Row 0: %, CE, C, Backspace -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_percent"
+                style="@style/CalcButton.Operator"
+                android:text="@string/btn_percent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_ce"
+                style="@style/CalcButton.Operator"
+                android:text="@string/btn_ce" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_c"
+                style="@style/CalcButton.Operator"
+                android:text="@string/btn_c" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_backspace"
+                style="@style/CalcButton.Operator"
+                android:text="@string/btn_backspace" />
+
+            <!-- Row 1: 1/x, x², √x, ÷ -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_one_over_x"
+                style="@style/CalcButton.Operator"
+                android:text="@string/btn_one_over_x" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_sqr"
+                style="@style/CalcButton.Operator"
+                android:text="@string/btn_sqr" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_sqrt"
+                style="@style/CalcButton.Operator"
+                android:text="@string/btn_sqrt" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_divide"
+                style="@style/CalcButton.Operator"
+                android:text="@string/btn_divide" />
+
+            <!-- Row 2: 7, 8, 9, × -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_7"
+                style="@style/CalcButton.Digit"
+                android:text="@string/btn_7" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_8"
+                style="@style/CalcButton.Digit"
+                android:text="@string/btn_8" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_9"
+                style="@style/CalcButton.Digit"
+                android:text="@string/btn_9" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_multiply"
+                style="@style/CalcButton.Operator"
+                android:text="@string/btn_multiply" />
+
+            <!-- Row 3: 4, 5, 6, - -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_4"
+                style="@style/CalcButton.Digit"
+                android:text="@string/btn_4" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_5"
+                style="@style/CalcButton.Digit"
+                android:text="@string/btn_5" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_6"
+                style="@style/CalcButton.Digit"
+                android:text="@string/btn_6" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_subtract"
+                style="@style/CalcButton.Operator"
+                android:text="@string/btn_subtract" />
+
+            <!-- Row 4: 1, 2, 3, + -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_1"
+                style="@style/CalcButton.Digit"
+                android:text="@string/btn_1" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_2"
+                style="@style/CalcButton.Digit"
+                android:text="@string/btn_2" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_3"
+                style="@style/CalcButton.Digit"
+                android:text="@string/btn_3" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add"
+                style="@style/CalcButton.Operator"
+                android:text="@string/btn_add" />
+
+            <!-- Row 5: +/-, 0, ., = -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_negate"
+                style="@style/CalcButton.Digit"
+                android:text="@string/btn_negate" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_0"
+                style="@style/CalcButton.Digit"
+                android:text="@string/btn_0" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_dot"
+                style="@style/CalcButton.Digit"
+                android:text="@string/btn_dot" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_equals"
+                style="@style/CalcButton.Equals"
+                android:text="@string/btn_equals" />
+        </GridLayout>
+
+        <!-- History Overlay Panel (hidden by default) -->
+        <LinearLayout
+            android:id="@+id/history_panel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/calc_history_bg"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:scrollbars="vertical" />
+
+                <TextView
+                    android:id="@+id/tv_history_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/history_empty"
+                    android:textColor="@color/calc_display_secondary"
+                    android:textSize="15sp" />
+            </FrameLayout>
+
+            <!-- Bottom bar in history panel: Trash / Clear button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="end|center_vertical"
+                android:paddingEnd="12dp"
+                android:background="@color/calc_background">
+
+                <ImageButton
+                    android:id="@+id/btn_clear_history"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_delete"
+                    android:contentDescription="@string/content_desc_clear_history" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
